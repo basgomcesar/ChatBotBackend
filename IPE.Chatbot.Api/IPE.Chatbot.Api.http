@@ -1,0 +1,6 @@
+@IPE.Chatbot.Api_HostAddress = http://localhost:5003
+
+GET {{IPE.Chatbot.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

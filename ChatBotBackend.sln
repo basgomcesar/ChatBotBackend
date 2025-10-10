@@ -19,9 +19,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPE.Chatbot.Application", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPE.Chatbot.Domain", "IPE.Chatbot.Domail\IPE.Chatbot.Domain.csproj", "{E3600CE1-A0BA-4F6B-A1B8-A49B2E305923}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Chatbot.External", "API.Chatbot.External\API.Chatbot.External.csproj", "{2E48A366-0364-4DA4-9E22-3510A75C10D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPE.Chatbot.External", "IPE.Chatbot.External\IPE.Chatbot.External.csproj", "{2E48A366-0364-4DA4-9E22-3510A75C10D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Chatbot.Persistence", "API.Chatbot.Persistence\API.Chatbot.Persistence.csproj", "{DC57BECA-1A79-4538-BCF3-248B65224D9A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IPE.Chatbot.Persistence", "IPE.Chatbot.Persistence\IPE.Chatbot.Persistence.csproj", "{DC57BECA-1A79-4538-BCF3-248B65224D9A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

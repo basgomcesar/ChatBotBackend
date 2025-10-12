@@ -10,6 +10,10 @@ namespace IPE.Chatbot.Domain.Entities.chatBot
     {
         public int Id { get; set; }
         public string Nombre { get; set; }
-        public string Clave { get; set; }
+        public string Telefono { get; set; }
+        public int Tipo { get; set; }
+        public string  Flujo { get; set; }
+        public string Paso { get; set; }
+        public string Folio { get; set; }
     }
 }

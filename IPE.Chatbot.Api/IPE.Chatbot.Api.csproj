@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="MediatR" Version="13.0.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="9.0.9">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -16,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\IPE.Chatbot.Persistence\IPE.Chatbot.Persistence.csproj" />
+    <ProjectReference Include="..\IPE.Chatbot.Application\IPE.Chatbot.Application.csproj" />
   </ItemGroup>
 
 </Project>

@@ -9,15 +9,9 @@
   <ItemGroup>
     <PackageReference Include="AutoMapper" Version="15.0.1" />
     <PackageReference Include="FluentValidation" Version="12.0.0" />
-    <PackageReference Include="MediatR" Version="12.4.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Abstractions" Version="2.3.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Core" Version="2.3.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.9" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\IPE.Chatbot.Domail\IPE.Chatbot.Domain.csproj" />
-    <ProjectReference Include="..\IPE.Chatbot.Persistence\IPE.Chatbot.Persistence.csproj" />
   </ItemGroup>
 
 </Project>

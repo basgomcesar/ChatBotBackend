@@ -1,11 +1,11 @@
 ﻿using IPE.Chatbot.Domain.Entities.chatBot;
+using IPE.Chatbot.Persistence.Configuracion.chatbot;
 using Microsoft.EntityFrameworkCore;
 
 namespace IPE.Chatbot.Persistence
 {
     public partial class ChatbotDbContext : DbContext
     {
-        public DbSet<DerechohabienteEntity> Derechohabientes { get; set; }
         public ChatbotDbContext()
         {
         }
@@ -17,7 +17,7 @@ namespace IPE.Chatbot.Persistence
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            OnModelCreatingPartial(modelBuilder);
+            modelBuilder.ApplyConfiguration(new DerechohabienteConfiguracion());
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

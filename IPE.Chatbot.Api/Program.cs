@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddDbContext<ChatbotDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+builder.Services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(IPE.Chatbot.Application.Features.Derechohabientes.Commands.CreateDerechohabienteCommand).Assembly));
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

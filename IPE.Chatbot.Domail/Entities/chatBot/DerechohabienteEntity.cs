@@ -14,6 +14,10 @@ namespace IPE.Chatbot.Domain.Entities.chatBot
         public int Tipo { get; set; }
         public string  Flujo { get; set; }
         public string Paso { get; set; }
+        public string Afiliacion { get; set; }
+       
         public string Folio { get; set; }
-    }
+        public DateTime UltimaInteraccion { get; set; }
+        public DateTime FechaCreacion { get; set; }
+}
 }

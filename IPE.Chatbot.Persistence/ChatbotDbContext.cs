@@ -16,10 +16,12 @@ namespace IPE.Chatbot.Persistence
         }
 
         public DbSet<DerechohabienteEntity> Derechohabientes { get; set; }
+        public DbSet<SolicitudesSimulacionEntity> SolicitudesSimulacion { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new DerechohabienteConfiguracion());
+            modelBuilder.ApplyConfiguration(new SolicitudesSimulacionConfiguracion());
         }
 
         partial void OnModelCreatingPartial(ModelBuilder modelBuilder);

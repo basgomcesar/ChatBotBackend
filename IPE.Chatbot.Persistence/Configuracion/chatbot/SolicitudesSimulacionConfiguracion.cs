@@ -15,9 +15,9 @@ namespace IPE.Chatbot.Persistence.Configuracion.chatbot
         {
             builder.HasKey(x => x.Id);
             builder.Property(x => x.DerechohabienteId).IsRequired();
-            builder.Property(x => x.TipoSimulacion);
-            builder.Property(x => x.FechaSolicitud);
-            builder.Property(x => x.Estado);
+            builder.Property(x => x.TipoSimulacion).IsRequired();
+            builder.Property(x => x.FechaSolicitud).IsRequired();
+            builder.Property(x => x.Estado).IsRequired();
             
             // Configure the relationship
             builder.HasOne(x => x.Derechohabiente)

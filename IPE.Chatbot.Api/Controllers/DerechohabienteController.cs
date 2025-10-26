@@ -116,7 +116,9 @@ namespace IPE.Chatbot.Api.Controllers
         [HttpPost("update-state")]
         public async Task<ActionResult> UpdateState([FromBody] UpdateStateDto dto)
         {
-            _logger.LogInformation("UpdateState endpoint called for phone: {Telefono}", dto.Telefono);
+            // Sanitize phone number for logging to prevent log forging
+            var sanitizedPhone = dto.Telefono?.Replace("\r", "").Replace("\n", "") ?? "";
+            _logger.LogInformation("UpdateState endpoint called for phone: {Telefono}", sanitizedPhone);
             
             if (string.IsNullOrEmpty(dto.Telefono))
             {
@@ -143,7 +145,9 @@ namespace IPE.Chatbot.Api.Controllers
         [HttpGet("get-state/{telefono}")]
         public async Task<ActionResult<StateDto>> GetState(string telefono)
         {
-            _logger.LogInformation("GetState endpoint called for phone: {Telefono}", telefono);
+            // Sanitize phone number for logging to prevent log forging
+            var sanitizedPhone = telefono?.Replace("\r", "").Replace("\n", "") ?? "";
+            _logger.LogInformation("GetState endpoint called for phone: {Telefono}", sanitizedPhone);
             
             if (string.IsNullOrEmpty(telefono))
             {

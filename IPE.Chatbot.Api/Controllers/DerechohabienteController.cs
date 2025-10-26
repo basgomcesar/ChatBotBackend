@@ -112,5 +112,57 @@ namespace IPE.Chatbot.Api.Controllers
             _logger.LogInformation("Test endpoint called.");
             return Ok("DerechohabienteController is working!");
         }
+
+        [HttpPost("update-state")]
+        public async Task<ActionResult> UpdateState([FromBody] UpdateStateDto dto)
+        {
+            // Sanitize phone number for logging to prevent log forging
+            var sanitizedPhone = dto.Telefono?.Replace("\r", "").Replace("\n", "") ?? "";
+            _logger.LogInformation("UpdateState endpoint called for phone: {Telefono}", sanitizedPhone);
+            
+            if (string.IsNullOrEmpty(dto.Telefono))
+            {
+                return BadRequest(new { message = "Teléfono requerido" });
+            }
+
+            var command = new UpdateStateCommand
+            {
+                Telefono = dto.Telefono,
+                Flujo = dto.Flujo,
+                Paso = dto.Paso
+            };
+
+            var result = await _mediator.Send(command);
+            
+            if (!result)
+            {
+                return BadRequest(new { success = false, message = "Failed to update state" });
+            }
+
+            return Ok(new { success = true });
+        }
+
+        [HttpGet("get-state/{telefono}")]
+        public async Task<ActionResult<StateDto>> GetState(string telefono)
+        {
+            // Sanitize phone number for logging to prevent log forging
+            var sanitizedPhone = telefono?.Replace("\r", "").Replace("\n", "") ?? "";
+            _logger.LogInformation("GetState endpoint called for phone: {Telefono}", sanitizedPhone);
+            
+            if (string.IsNullOrEmpty(telefono))
+            {
+                return BadRequest(new { message = "Teléfono requerido" });
+            }
+
+            var query = new GetStateByPhoneQuery { Telefono = telefono };
+            var result = await _mediator.Send(query);
+            
+            if (result == null)
+            {
+                return NotFound(new { message = $"State for phone {telefono} not found." });
+            }
+
+            return Ok(result);
+        }
     }
 }

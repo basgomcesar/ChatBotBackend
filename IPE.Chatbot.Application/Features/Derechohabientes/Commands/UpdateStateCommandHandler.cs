@@ -3,6 +3,7 @@ using IPE.Chatbot.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text.Json;
 
 namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
@@ -12,15 +13,18 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
         private readonly ChatbotDbContext _context;
         private readonly IDistributedCache _cache;
         private readonly IChatbotNotificationService _notificationService;
+        private readonly IServiceScopeFactory _serviceScopeFactory;
 
         public UpdateStateCommandHandler(
             ChatbotDbContext context,
             IDistributedCache cache,
-            IChatbotNotificationService notificationService)
+            IChatbotNotificationService notificationService,
+            IServiceScopeFactory serviceScopeFactory)
         {
             _context = context;
             _cache = cache;
             _notificationService = notificationService;
+            _serviceScopeFactory = serviceScopeFactory;
         }
 
         public async Task<bool> Handle(UpdateStateCommand request, CancellationToken cancellationToken)
@@ -51,12 +55,15 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
                 cacheOptions,
                 cancellationToken);
 
-            // Update database asynchronously (non-blocking)
+            // Update database asynchronously (non-blocking) using a new scope for thread safety
             _ = Task.Run(async () =>
             {
                 try
                 {
-                    var user = await _context.Derechohabientes
+                    using var scope = _serviceScopeFactory.CreateScope();
+                    var scopedContext = scope.ServiceProvider.GetRequiredService<ChatbotDbContext>();
+                    
+                    var user = await scopedContext.Derechohabientes
                         .FirstOrDefaultAsync(u => u.Telefono == request.Telefono);
 
                     if (user != null)
@@ -64,14 +71,14 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
                         user.Flujo = request.Flujo;
                         user.Paso = request.Paso;
                         user.UltimaInteraccion = DateTime.UtcNow;
-                        await _context.SaveChangesAsync();
+                        await scopedContext.SaveChangesAsync();
                     }
                 }
                 catch (Exception)
                 {
                     // Log error if needed, but don't block the main request
                 }
-            }, cancellationToken);
+            });
 
             // Notify all connected clients via SignalR
             await _notificationService.NotifyStateUpdate(

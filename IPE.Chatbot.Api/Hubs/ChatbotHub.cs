@@ -4,14 +4,8 @@ namespace IPE.Chatbot.Api.Hubs
 {
     public class ChatbotHub : Hub
     {
-        public async Task SendStateUpdate(string telefono, string flujo, string paso)
-        {
-            await Clients.All.SendAsync("UserStateUpdated", new
-            {
-                telefono,
-                flujo,
-                paso
-            });
-        }
+        // Hub for SignalR real-time communication
+        // Client connections are managed automatically by SignalR
+        // Notifications are sent via IChatbotNotificationService
     }
 }

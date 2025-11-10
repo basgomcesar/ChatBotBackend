@@ -129,7 +129,10 @@ namespace IPE.Chatbot.Api.Controllers
             {
                 Telefono = dto.Telefono,
                 Flujo = dto.Flujo,
-                Paso = dto.Paso
+                Paso = dto.Paso,
+                Nombre = dto.Nombre,
+                Folio = dto.Folio,
+                Tipo = dto.Tipo
             };
 
             var result = await _mediator.Send(command);

@@ -9,18 +9,16 @@ namespace IPE.Chatbot.Domain.Entities.chatBot
     public class DerechohabienteEntity
     {
         public int Id { get; set; }
-        public string Nombre { get; set; }
-        public string Telefono { get; set; }
-        public int Tipo { get; set; }
-        public string  Flujo { get; set; }
-        public string Paso { get; set; }
-        public string Afiliacion { get; set; }
-       
-        public string Folio { get; set; }
-        public DateTime UltimaInteraccion { get; set; }
-        public DateTime FechaCreacion { get; set; }
-        
-        // Navigation property
+        public string? Nombre { get; set; }
+        public string? Telefono { get; set; }
+        public string? Tipo { get; set; }
+        public string? Flujo { get; set; }
+        public string? Paso { get; set; }
+        public string? Afiliacion { get; set; }   // <- ahora puede ser null
+        public string? Folio { get; set; }
+        public DateTime? UltimaInteraccion { get; set; } // opcional si quieres permitir null
+        public DateTime FechaCreacion { get; set; } // si siempre la estableces, puede quedarse no-null
+
         public ICollection<SolicitudesSimulacionEntity> SolicitudesSimulacion { get; set; } = new List<SolicitudesSimulacionEntity>();
-}
+    }
 }

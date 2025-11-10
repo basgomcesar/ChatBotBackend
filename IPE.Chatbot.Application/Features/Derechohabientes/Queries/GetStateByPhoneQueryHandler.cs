@@ -3,7 +3,10 @@ using IPE.Chatbot.Persistence;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Distributed;
+using System;
 using System.Text.Json;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
 {
@@ -36,6 +39,8 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
                     var stateDto = JsonSerializer.Deserialize<StateDto>(cachedData);
                     if (stateDto != null)
                     {
+                       Console.WriteLine("Cache hit for phone: " + request.Telefono);
+                        Console.WriteLine("Cached Data: " + cachedData);
                         return stateDto;
                     }
                 }
@@ -51,7 +56,20 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
 
             if (entity == null)
             {
-                return null;
+                // Create a new entity with sensible defaults when none exists
+                entity = new Domain.Entities.chatBot.DerechohabienteEntity
+                {
+                    Telefono = request.Telefono,
+                    Flujo = "BIENVENIDA",
+                    Paso = "SALUDO_INICIAL",
+                    Nombre = string.Empty,
+                    Folio = Guid.NewGuid().ToString(),
+                    Tipo = string.Empty,
+                    UltimaInteraccion = DateTime.UtcNow
+                };
+
+                _context.Derechohabientes.Add(entity);
+                await _context.SaveChangesAsync(cancellationToken);
             }
 
             var result = new StateDto
@@ -59,6 +77,9 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
                 Telefono = entity.Telefono,
                 Flujo = entity.Flujo,
                 Paso = entity.Paso,
+                Nombre = entity.Nombre,
+                Folio = entity.Folio,
+                Tipo = entity.Tipo,
                 UltimaInteraccion = entity.UltimaInteraccion
             };
 

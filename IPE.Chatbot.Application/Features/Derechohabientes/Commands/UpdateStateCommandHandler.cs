@@ -94,7 +94,9 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
 
                     if (user != null)
                     {
+                        bool flujoCambio = false;
                         if (!string.IsNullOrEmpty(request.Flujo))
+                            flujoCambio = user.Flujo != request.Flujo;
                             user.Flujo = request.Flujo;
 
                         if (!string.IsNullOrEmpty(request.Paso))
@@ -110,6 +112,27 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
                             user.Tipo = request.Tipo;
 
                         user.UltimaInteraccion = DateTime.UtcNow;
+
+                        if (flujoCambio)
+                        {
+                            switch (request.Flujo)
+                            {
+                                case "SIMULACION":
+                                    scopedContext.SolicitudesSimulacion.Add(new Domain.Entities.chatBot.SolicitudesSimulacionEntity
+                                        {
+                                            DerechohabienteId = user.Id,
+                                            TipoSimulacion = user.Tipo ?? "GENERAL",
+                                            FechaSolicitud = DateTime.UtcNow,
+                                            Estado = user.Paso ?? "SIMULACION_INICIAL"
+                                    }
+                                    );
+                                    break;
+                                case "ASESOR":
+                                    user.Paso = "EsperandoAgente";
+                                    break;
+                                    // Agregar más casos según sea necesario
+                            }
+                        }
 
                         await scopedContext.SaveChangesAsync();
                     }

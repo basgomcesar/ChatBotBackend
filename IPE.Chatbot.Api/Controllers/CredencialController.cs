@@ -11,6 +11,7 @@ namespace IPE.Chatbot.Api.Controllers
         private readonly ILogger<CredencialController> _logger;
         private readonly IOcrService _ocrService;
         private readonly IWebHostEnvironment _environment;
+        private const long MaxFileSize = 10 * 1024 * 1024; // 10 MB
 
         public CredencialController(
             ILogger<CredencialController> logger,
@@ -23,11 +24,17 @@ namespace IPE.Chatbot.Api.Controllers
         }
 
         [HttpPost("upload")]
+        [RequestSizeLimit(10 * 1024 * 1024)] // 10 MB limit
         public async Task<ActionResult<CredencialOcrResultDto>> UploadCredencial(IFormFile file)
         {
             if (file == null || file.Length == 0)
             {
                 return BadRequest(new { message = "No file uploaded or file is empty" });
+            }
+
+            if (file.Length > MaxFileSize)
+            {
+                return BadRequest(new { message = "File size exceeds the maximum allowed size of 10 MB" });
             }
 
             // Validate file extension
@@ -47,7 +54,7 @@ namespace IPE.Chatbot.Api.Controllers
                     Directory.CreateDirectory(credencialesPath);
                 }
 
-                // Generate unique filename
+                // Generate unique filename - always save as .jpg per requirements
                 var fileName = $"{Guid.NewGuid()}.jpg";
                 var filePath = Path.Combine(credencialesPath, fileName);
 

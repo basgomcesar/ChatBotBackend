@@ -24,6 +24,9 @@ builder.Services.AddSignalR();
 // Register notification service
 builder.Services.AddScoped<IChatbotNotificationService, ChatbotNotificationService>();
 
+// Register OCR service
+builder.Services.AddScoped<IOcrService, OcrService>();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 

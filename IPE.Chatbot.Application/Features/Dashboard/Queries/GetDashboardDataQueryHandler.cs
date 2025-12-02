@@ -30,12 +30,12 @@ namespace IPE.Chatbot.Application.Features.Dashboard.Queries
             var derechohabientesDto = derechohabientesHoy.Select(entity => new DerechohabienteDto
             {
                 Id = entity.Id,
-                Nombre = entity.Nombre ?? string.Empty,
-                Telefono = entity.Telefono ?? string.Empty,
-                Tipo = entity.Tipo ?? string.Empty,
-                Flujo = entity.Flujo ?? string.Empty,
-                Paso = entity.Paso ?? string.Empty,
-                Folio = entity.Folio ?? string.Empty
+                Nombre = entity.Nombre,
+                Telefono = entity.Telefono,
+                Tipo = entity.Tipo,
+                Flujo = entity.Flujo,
+                Paso = entity.Paso,
+                Folio = entity.Folio
             }).ToList();
 
             return new DashboardDto

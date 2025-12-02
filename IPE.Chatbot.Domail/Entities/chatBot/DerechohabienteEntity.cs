@@ -14,10 +14,10 @@ namespace IPE.Chatbot.Domain.Entities.chatBot
         public string? Tipo { get; set; }
         public string? Flujo { get; set; }
         public string? Paso { get; set; }
-        public string? Afiliacion { get; set; }   // <- ahora puede ser null
+        public string? Afiliacion { get; set; }  
         public string? Folio { get; set; }
-        public DateTime? UltimaInteraccion { get; set; } // opcional si quieres permitir null
-        public DateTime FechaCreacion { get; set; } // si siempre la estableces, puede quedarse no-null
+        public DateTime? UltimaInteraccion { get; set; } 
+        public DateTime FechaCreacion { get; set; }
 
         public ICollection<SolicitudesSimulacionEntity> SolicitudesSimulacion { get; set; } = new List<SolicitudesSimulacionEntity>();
     }

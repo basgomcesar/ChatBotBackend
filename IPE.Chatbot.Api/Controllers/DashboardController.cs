@@ -1,8 +1,6 @@
-﻿using IPE.Chatbot.Application.Features.Derechohabientes.Commands;
-using IPE.Chatbot.Application.Features.Derechohabientes.DTOs;
-using IPE.Chatbot.Application.Features.Derechohabientes.Queries;
+﻿using IPE.Chatbot.Application.Features.Dashboard.DTOs;
+using IPE.Chatbot.Application.Features.Dashboard.Queries;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IPE.Chatbot.Api.Controllers
@@ -11,10 +9,18 @@ namespace IPE.Chatbot.Api.Controllers
     [ApiController]
     public class DashboardController: ControllerBase
     {
-        [HttpGet(Name = "dashboard-data")]
-        public string Get()
+        private readonly IMediator _mediator;
+
+        public DashboardController(IMediator mediator)
         {
-            return "";
+            _mediator = mediator;
+        }
+
+        [HttpGet("dashboard-data")]
+        public async Task<ActionResult<DashboardDto>> GetDashboardData()
+        {
+            var result = await _mediator.Send(new GetDashboardDataQuery());
+            return Ok(result);
         }
     }
 }

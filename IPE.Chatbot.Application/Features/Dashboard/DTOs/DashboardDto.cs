@@ -1,11 +1,10 @@
-﻿namespace IPE.Chatbot.Application.Features.Dashboard.DTOs
+﻿using IPE.Chatbot.Application.Features.Derechohabientes.DTOs;
+
+namespace IPE.Chatbot.Application.Features.Dashboard.DTOs
 {
     public class DashboardDto
     {
-        public DashboardDto() { }
-        // Add properties relevant to the dashboard data
-        //Array of all derechohabientes using the chatbot today
         public int TotalUsersToday { get; set; }
-        public Derechohabiente 
+        public List<DerechohabienteDto> Derechohabientes { get; set; } = new List<DerechohabienteDto>();
     }
 }

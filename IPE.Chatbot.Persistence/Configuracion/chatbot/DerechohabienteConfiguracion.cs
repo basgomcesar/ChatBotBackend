@@ -20,6 +20,8 @@ namespace IPE.Chatbot.Persistence.Configuracion.chatbot
             builder.Property(x => x.Folio);
             builder.Property(x => x.Telefono);
             builder.Property(x => x.Tipo);
+            builder.Property(x => x.UltimaInteraccion);
+            builder.Property(x => x.FechaCreacion);
         }
     }
 }

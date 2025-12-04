@@ -27,7 +27,8 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
                 Tipo = entity.Tipo,
                 Flujo = entity.Flujo,
                 Paso = entity.Paso,
-                Folio = entity.Folio
+                Folio = entity.Folio,
+                UltimaActualizacion = entity.UltimaInteraccion
             }).ToList();
         }
     }

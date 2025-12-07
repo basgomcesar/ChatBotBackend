@@ -20,5 +20,6 @@ namespace IPE.Chatbot.Domain.Entities.chatBot
         public DateTime FechaCreacion { get; set; }
 
         public ICollection<SolicitudesSimulacionEntity> SolicitudesSimulacion { get; set; } = new List<SolicitudesSimulacionEntity>();
+        public ICollection<SolicitudesAsesorEntity> SolicitudesAsesor { get; set; } = new List<SolicitudesAsesorEntity>();
     }
 }

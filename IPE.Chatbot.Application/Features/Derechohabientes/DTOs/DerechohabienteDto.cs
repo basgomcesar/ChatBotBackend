@@ -9,6 +9,6 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.DTOs
         public string Flujo { get; set; } = string.Empty;
         public string Paso { get; set; } = string.Empty;
         public string Folio { get; set; } = string.Empty;
-        public DateTime? UltimaActualizacion { get; set; }
+        public string UltimaActualizacion { get; set; }
     }
 }

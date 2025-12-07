@@ -28,7 +28,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Queries
                 Flujo = entity.Flujo,
                 Paso = entity.Paso,
                 Folio = entity.Folio,
-                UltimaActualizacion = entity.UltimaInteraccion
+                UltimaActualizacion = entity.UltimaInteraccion?.ToLocalTime().ToString("HH:mm dd/MM")
             }).ToList();
         }
     }

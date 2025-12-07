@@ -7,7 +7,7 @@ namespace IPE.Chatbot.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class DashboardController: ControllerBase
+    public class DashboardController : ControllerBase
     {
         private readonly IMediator _mediator;
 
@@ -22,5 +22,12 @@ namespace IPE.Chatbot.Api.Controllers
             var result = await _mediator.Send(new GetDashboardDataQuery());
             return Ok(result);
         }
+        [HttpGet("dashboard-simulacion")]
+        public async Task<ActionResult<DashboardSimulacionDto>> GetDashboardSimualcion()
+        {
+            var result = await _mediator.Send(new GetDashboardSimulacionQuery());
+            return Ok(result);
+        }
+
     }
 }

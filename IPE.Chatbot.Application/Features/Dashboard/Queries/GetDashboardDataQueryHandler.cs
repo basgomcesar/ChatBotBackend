@@ -35,7 +35,8 @@ namespace IPE.Chatbot.Application.Features.Dashboard.Queries
                 Tipo = entity.Tipo,
                 Flujo = entity.Flujo,
                 Paso = entity.Paso,
-                Folio = entity.Folio
+                Folio = entity.Folio,
+                UltimaActualizacion = entity.UltimaInteraccion?.ToLocalTime().ToString("HH:mm dd/MM")
             }).ToList();
 
             return new DashboardDto

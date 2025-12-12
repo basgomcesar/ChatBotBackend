@@ -1,10 +1,10 @@
 ﻿using IPE.Chatbot.Application.Features.Derechohabientes.DTOs;
-
 namespace IPE.Chatbot.Application.Features.Dashboard.DTOs
 {
-    public class DashboardSimulacionDto
+    public class DashboardAsesorDto
     {
-        public int TotalSolicitationsToday { get; set; }
-        public List<SolicitudesSimulacionDto> SolicitudesSimulacion { get; set; } = new List<SolicitudesSimulacionDto>();
+        public int TotalSolicitudesHoy {  get; set; }
+        public List<SolicitudesAsesorDto> SolicitudesAsesor { get; set; } = new List<SolicitudesAsesorDto>();
+
     }
 }

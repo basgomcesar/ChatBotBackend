@@ -3,7 +3,7 @@ using MediatR;
 
 namespace IPE.Chatbot.Application.Features.Dashboard.Queries
 {
-    public class GetDashboardSimulacionQuery : IRequest<DashboardSimulacionDto>
+    public class GetDashboardAsesorQuery : IRequest<DashboardAsesorDto>
     {
     }
 }

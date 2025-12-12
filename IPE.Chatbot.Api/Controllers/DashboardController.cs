@@ -28,6 +28,11 @@ namespace IPE.Chatbot.Api.Controllers
             var result = await _mediator.Send(new GetDashboardSimulacionQuery());
             return Ok(result);
         }
-
+        [HttpGet("dashboard-asesor")]
+        public async Task<ActionResult<DashboardAsesorDto>> GetDashboardAsesor()
+        {
+            var result = await _mediator.Send(new GetDashboardAsesorQuery());
+            return Ok(result);
+        }
     }
 }

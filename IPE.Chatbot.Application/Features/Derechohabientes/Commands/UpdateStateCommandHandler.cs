@@ -128,7 +128,13 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
                                     );
                                     break;
                                 case "ASESOR":
-                                    user.Paso = "EsperandoAgente";
+                                    scopedContext.SolicitudesAsesor.Add(new Domain.Entities.chatBot.SolicitudesAsesorEntity
+                                        {
+                                            DerechohabienteId = user.Id,
+                                            FechaSolicitud = DateTime.UtcNow,
+                                            Estado = user.Paso ?? "ASESOR_INICIAL"
+                                    }
+                                    );
                                     break;
                                     // Agregar más casos según sea necesario
                             }

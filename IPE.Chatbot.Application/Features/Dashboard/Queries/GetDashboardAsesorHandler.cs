@@ -2,38 +2,51 @@
 using IPE.Chatbot.Application.Features.Derechohabientes.DTOs;
 using IPE.Chatbot.Persistence;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace IPE.Chatbot.Application.Features.Dashboard.Queries
 {
-    public class GetDashboardSimulacionHandler : IRequestHandler<GetDashboardSimulacionQuery, DashboardSimulacionDto>
+    public class GetDashboardAsesorHandler : IRequestHandler<GetDashboardAsesorQuery, DashboardAsesorDto>
     {
         private readonly ChatbotDbContext _context;
-        public GetDashboardSimulacionHandler(ChatbotDbContext context)
+
+        public GetDashboardAsesorHandler(ChatbotDbContext context)
         {
             _context = context;
         }
-        public Task<DashboardSimulacionDto> Handle(GetDashboardSimulacionQuery request, CancellationToken cancellationToken)
+
+        public async Task<DashboardAsesorDto> Handle(GetDashboardAsesorQuery request, CancellationToken cancellationToken)
         {
             var today = DateTime.Today;
             var tomorrow = today.AddDays(1);
 
-            //Seleccionar el total de simulaciones realizadas 
-            var solicitationsToday = _context.SolicitudesSimulacion.Where(s => s.FechaSolicitud >= today && s.FechaSolicitud < tomorrow);
-            var totalSolicitationsToday = solicitationsToday.Count();
-            var dashboardDto = new DashboardSimulacionDto
-            {
-                TotalSolicitationsToday = totalSolicitationsToday,
-                SolicitudesSimulacion = solicitationsToday.Select(s => new SolicitudesSimulacionDto
+            // Obtener solicitudes del día
+            var solicitudesHoy = await _context.SolicitudesAsesor
+                .Where(s => s.FechaSolicitud >= today && s.FechaSolicitud < tomorrow)
+                .Select(s => new
                 {
-                    Id = s.Id,
-                    NombreDerechohabiente = s.Derechohabiente.Nombre,
-                    Telefono = s.Derechohabiente.Telefono,
-                    TipoSimulacion = s.TipoSimulacion,
-                    FechaSolicitud = s.FechaSolicitud,
-                    Estado = s.Estado
-                }).ToList()
+                    s.Id,
+                    s.DerechohabienteId,
+                    s.FechaSolicitud,
+                    s.Derechohabiente.Nombre,
+                    Estado = s.Estado.ToString()
+                })
+                .ToListAsync(cancellationToken);
+
+            var solicitudesDto = solicitudesHoy.Select(s => new SolicitudesAsesorDto
+            {
+                Id = s.Id,
+                DerechohabienteId = s.DerechohabienteId,
+                FechaSolicitude = s.FechaSolicitud.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"),
+                NombreDerechohabiente = s.Nombre,
+                Estado = s.Estado
+            }).ToList();
+
+            return new DashboardAsesorDto
+            {
+                TotalSolicitudesHoy = solicitudesDto.Count,
+                SolicitudesAsesor = solicitudesDto
             };
-            return Task.FromResult(dashboardDto);
         }
     }
 }

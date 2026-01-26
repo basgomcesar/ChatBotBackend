@@ -9,5 +9,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.DTOs
         public string Folio { get; set; } = string.Empty;
         public string Tipo { get; set; } = string.Empty;
         public DateTime? UltimaInteraccion { get; set; }
+        public string TipoPrestamo { get; set; } = string.Empty;
+        public string NumeroAfiliacion { get; set; } = string.Empty;
     }
 }

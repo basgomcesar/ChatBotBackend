@@ -80,6 +80,12 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
             if (!string.IsNullOrEmpty(request.NumeroAfiliacion))
                 node["NumeroAfiliacion"] = request.NumeroAfiliacion;
 
+            if (request.NumeroDeAvalesProcesados.HasValue)
+                node["NumeroDeAvalesProcesados"] = request.NumeroDeAvalesProcesados.Value;
+
+            if (request.Avales != null)
+                node["Avales"] = JsonSerializer.SerializeToNode(request.Avales);
+
             var cacheOptions = new DistributedCacheEntryOptions
             {
                 AbsoluteExpirationRelativeToNow = TimeSpan.FromMinutes(30)
@@ -89,7 +95,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
             await _cache.SetStringAsync(cacheKey, node.ToJsonString(), cacheOptions, cancellationToken);
 
             // Actualizar base de datos en scope separado (igual que antes), 
-            // pero también solo con campos que llegaron para no sobreescribir con vacío.
+            // pero tambiï¿½n solo con campos que llegaron para no sobreescribir con vacï¿½o.
             _ = Task.Run(async () =>
             {
                 try
@@ -144,7 +150,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
                                     }
                                     );
                                     break;
-                                    // Agregar más casos según sea necesario
+                                    // Agregar mï¿½s casos segï¿½n sea necesario
                             }
                         }
 

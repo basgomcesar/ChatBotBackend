@@ -134,7 +134,9 @@ namespace IPE.Chatbot.Api.Controllers
                 Folio = dto.Folio,
                 Tipo = dto.Tipo,
                 TipoPrestamo = dto.TipoPrestamo,
-                NumeroAfiliacion = dto.NumeroAfiliacion
+                NumeroAfiliacion = dto.NumeroAfiliacion,
+                NumeroDeAvalesProcesados = dto.NumeroDeAvalesProcesados,
+                Avales = dto.Avales
             };
 
             var result = await _mediator.Send(command);

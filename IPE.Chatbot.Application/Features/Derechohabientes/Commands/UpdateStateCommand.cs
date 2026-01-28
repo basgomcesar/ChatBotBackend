@@ -1,3 +1,4 @@
+using IPE.Chatbot.Application.Features.Derechohabientes.DTOs;
 using MediatR;
 
 namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
@@ -12,5 +13,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
         public string Tipo { get; set; } = string.Empty;
         public string TipoPrestamo { get; set; } = string.Empty;
         public string NumeroAfiliacion { get; set; } = string.Empty;
+        public int? NumeroDeAvalesProcesados { get; set; }
+        public List<AvalDto>? Avales { get; set; }
     }
 }

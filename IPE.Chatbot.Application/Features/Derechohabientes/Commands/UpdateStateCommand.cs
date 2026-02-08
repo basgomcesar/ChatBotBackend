@@ -14,6 +14,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
         public string TipoPrestamo { get; set; } = string.Empty;
         public string NumeroAfiliacion { get; set; } = string.Empty;
         public int? NumeroDeAvalesProcesados { get; set; }
+        public int? CantidadAvalesRequeridos { get; set; }
         public List<AvalDto>? Avales { get; set; }
     }
 }

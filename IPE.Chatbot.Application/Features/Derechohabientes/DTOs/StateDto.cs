@@ -11,6 +11,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.DTOs
         public DateTime? UltimaInteraccion { get; set; }
         public string TipoPrestamo { get; set; } = string.Empty;
         public string NumeroAfiliacion { get; set; } = string.Empty;
+        public int CantidadAvalesRequeridos { get; set; }
         public int NumeroDeAvalesProcesados { get; set; }
         public List<AvalDto> Avales { get; set; } = new List<AvalDto>();
     }

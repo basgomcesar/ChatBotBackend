@@ -39,6 +39,10 @@ namespace IPE.Chatbot.Application.Features.Dashboard.Queries
                 DerechohabienteId = s.DerechohabienteId,
                 FechaSolicitude = s.FechaSolicitud.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss"),
                 NombreDerechohabiente = s.Nombre,
+                NumeroTelefono = _context.Derechohabientes
+                    .Where(d => d.Id == s.DerechohabienteId)
+                    .Select(d => d.Telefono)
+                    .FirstOrDefault(),
                 Estado = s.Estado
             }).ToList();
 

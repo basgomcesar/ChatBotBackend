@@ -55,6 +55,7 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
             // Asegurar Telefono y actualizar UltimaInteraccion
             Console.WriteLine($"Updating state for phone: {request.Telefono}");
             Console.WriteLine($"Data received: Flujo={request.Flujo}, Paso={request.Paso}, Nombre={request.Nombre}, Folio={request.Folio}, Tipo={request.Tipo}, TipoPrestamo={request.TipoPrestamo}");
+            Console.WriteLine($"CANTIDAD DE AVALES RECIBIDOS {request.CantidadAvalesRequeridos}");
             node["Telefono"] = request.Telefono;
             node["UltimaInteraccion"] = DateTime.UtcNow.ToString("o");
 
@@ -79,6 +80,9 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.Commands
 
             if (!string.IsNullOrEmpty(request.NumeroAfiliacion))
                 node["NumeroAfiliacion"] = request.NumeroAfiliacion;
+
+            if (request.CantidadAvalesRequeridos.HasValue)
+                node["CantidadAvalesRequeridos"] = request.CantidadAvalesRequeridos;
 
             if (request.NumeroDeAvalesProcesados.HasValue)
                 node["NumeroDeAvalesProcesados"] = request.NumeroDeAvalesProcesados.Value;

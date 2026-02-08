@@ -136,6 +136,7 @@ namespace IPE.Chatbot.Api.Controllers
                 TipoPrestamo = dto.TipoPrestamo,
                 NumeroAfiliacion = dto.NumeroAfiliacion,
                 NumeroDeAvalesProcesados = dto.NumeroDeAvalesProcesados,
+                CantidadAvalesRequeridos = dto.CantidadAvalesRequeridos,
                 Avales = dto.Avales
             };
 

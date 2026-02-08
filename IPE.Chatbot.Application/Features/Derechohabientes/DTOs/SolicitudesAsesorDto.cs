@@ -13,5 +13,6 @@ namespace IPE.Chatbot.Application.Features.Derechohabientes.DTOs
         public int DerechohabienteId { get; set; }
         public string Estado { get; set; }
         public string FechaSolicitude { get; set; }
+        public string NumeroTelefono  { get; set; }
     }
 }
